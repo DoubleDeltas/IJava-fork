@@ -12,5 +12,6 @@ public interface ICodeEvaluatorBuilder {
     CodeEvaluatorBuilder stdout(PrintStream out);
     CodeEvaluatorBuilder stderr(PrintStream err);
     CodeEvaluatorBuilder stdin(InputStream in);
+    CodeEvaluatorBuilder startupScript(String script);
     CodeEvaluator build();
 }
