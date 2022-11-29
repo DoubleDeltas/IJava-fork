@@ -9,8 +9,8 @@ public class CodeEvaluatorDirector {
         this.builder = builder;
     }
 
-    public void construct() {
-        builder
+    public CodeEvaluator construct() {
+        return builder
                 .addClasspathFromString(System.getenv(IJava.CLASSPATH_KEY))
                 .compilerOptsFromString(System.getenv(IJava.COMPILER_OPTS_KEY))
                 .startupScript(IJava.resource(IJava.DEFAULT_SHELL_INIT_RESOURCE_PATH))
