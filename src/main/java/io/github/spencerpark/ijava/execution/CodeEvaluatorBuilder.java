@@ -93,30 +93,27 @@ public class CodeEvaluatorBuilder implements ICodeEvaluatorBuilder {
 
 
     public CodeEvaluatorBuilder stdout(PrintStream out) {
-        this.out = out;
+        if (out == null)
+            this.out = new PrintStream(CodeEvaluatorBuilder.STDOUT);
+        else
+            this.out = out;
         return this;
     }
 
     public CodeEvaluatorBuilder stderr(PrintStream err) {
-        this.err = err;
+        if (err == null)
+            this.err = new PrintStream(CodeEvaluatorBuilder.STDERR);
+        else
+            this.err = err;
         return this;
     }
 
     public CodeEvaluatorBuilder stdin(InputStream in) {
-        this.in = in;
+        if (in == null)
+            this.in = CodeEvaluatorBuilder.STDIN;
+        else
+            this.in = in;
         return this;
-    }
-
-    public CodeEvaluatorBuilder sysStdout() {
-        return this.stdout(new PrintStream(CodeEvaluatorBuilder.STDOUT));
-    }
-
-    public CodeEvaluatorBuilder sysStderr() {
-        return this.stderr(new PrintStream(CodeEvaluatorBuilder.STDERR));
-    }
-
-    public CodeEvaluatorBuilder sysStdin() {
-        return this.stdin(CodeEvaluatorBuilder.STDIN);
     }
 
     public CodeEvaluatorBuilder startupScript(String script) {
