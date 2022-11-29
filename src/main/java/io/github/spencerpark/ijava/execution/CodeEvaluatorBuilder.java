@@ -34,7 +34,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
-public class CodeEvaluatorBuilder {
+public class CodeEvaluatorBuilder implements ICodeEvaluatorBuilder {
     private static final Pattern PATH_SPLITTER = Pattern.compile(File.pathSeparator, Pattern.LITERAL);
     private static final Pattern BLANK = Pattern.compile("^\\s*$");
     private static final int BUFFER_SIZE = 1024;
