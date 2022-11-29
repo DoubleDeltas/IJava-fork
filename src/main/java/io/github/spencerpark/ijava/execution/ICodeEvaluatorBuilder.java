@@ -3,6 +3,7 @@ package io.github.spencerpark.ijava.execution;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public interface ICodeEvaluatorBuilder {
     CodeEvaluatorBuilder addClasspathFromString(String classpath);
@@ -14,4 +15,3 @@ public interface ICodeEvaluatorBuilder {
     CodeEvaluatorBuilder startupScript(String script);
     CodeEvaluator build();
 }
-
