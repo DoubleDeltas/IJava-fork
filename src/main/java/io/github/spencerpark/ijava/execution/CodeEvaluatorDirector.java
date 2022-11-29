@@ -5,7 +5,7 @@ import io.github.spencerpark.ijava.IJava;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-public abstract class CodeEvaluatorDirector {
+public class CodeEvaluatorDirector {
     private ICodeEvaluatorBuilder builder;
 
     public CodeEvaluatorDirector(ICodeEvaluatorBuilder builder) {

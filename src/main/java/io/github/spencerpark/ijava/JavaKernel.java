@@ -77,17 +77,7 @@ public class JavaKernel extends BaseKernel {
     private final StringStyler errorStyler;
 
     public JavaKernel() {
-        this.evaluator = new CodeEvaluatorBuilder()
-                .addClasspathFromString(System.getenv(IJava.CLASSPATH_KEY))
-                .compilerOptsFromString(System.getenv(IJava.COMPILER_OPTS_KEY))
-                .startupScript(IJava.resource(IJava.DEFAULT_SHELL_INIT_RESOURCE_PATH))
-                .startupScriptFiles(System.getenv(IJava.STARTUP_SCRIPTS_KEY))
-                .startupScript(System.getenv(IJava.STARTUP_SCRIPT_KEY))
-                .timeoutFromString(System.getenv(IJava.TIMEOUT_DURATION_KEY))
-                .sysStdout()
-                .sysStderr()
-                .sysStdin()
-                .build();
+        this.evaluator = new CodeEvaluatorDirector(new CodeEvaluatorBuilder()).construct();
         this.mavenResolver = new MavenResolver(this::addToClasspath);
 
         this.magicsTransformer = new MagicsSourceTransformer();

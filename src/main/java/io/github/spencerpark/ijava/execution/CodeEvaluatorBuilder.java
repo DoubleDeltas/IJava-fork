@@ -86,12 +86,6 @@ public class CodeEvaluatorBuilder implements ICodeEvaluatorBuilder {
         return this;
     }
 
-    public CodeEvaluatorBuilder compilerOpts(List<String> opts) {
-        this.compilerOpts.addAll(opts);
-        return this;
-    }
-
-
     public CodeEvaluatorBuilder stdout(PrintStream out) {
         if (out == null)
             this.out = new PrintStream(CodeEvaluatorBuilder.STDOUT);
