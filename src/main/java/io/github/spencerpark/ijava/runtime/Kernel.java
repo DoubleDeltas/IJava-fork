@@ -3,7 +3,7 @@ package io.github.spencerpark.ijava.runtime;
 import io.github.spencerpark.ijava.IJava;
 import io.github.spencerpark.ijava.JavaKernel;
 
-public class Kernel {
+public class Kernel extends IJava {
     public static JavaKernel getKernelInstance() {
         return IJava.getKernelInstance();
     }

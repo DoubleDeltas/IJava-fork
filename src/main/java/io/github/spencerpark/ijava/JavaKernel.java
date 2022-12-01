@@ -43,7 +43,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class JavaKernel extends BaseKernel {
+public class JavaKernel extends KernelExceptionFlow {
     public static String completeCodeSignifier() {
         return BaseKernel.IS_COMPLETE_YES;
     }
@@ -153,28 +153,7 @@ public class JavaKernel extends BaseKernel {
     }
 
     @Override
-    public List<String> formatError(Exception e) {
-        List<String> fmt = new LinkedList<>();
-        if (e instanceof CompilationException) {
-            return formatCompilationException((CompilationException) e);
-        } else if (e instanceof IncompleteSourceException) {
-            return formatIncompleteSourceException((IncompleteSourceException) e);
-        } else if (e instanceof EvalException) {
-            return formatEvalException((EvalException) e);
-        } else if (e instanceof UnresolvedReferenceException) {
-            return formatUnresolvedReferenceException(((UnresolvedReferenceException) e));
-        } else if (e instanceof EvaluationTimeoutException) {
-            return formatEvaluationTimeoutException((EvaluationTimeoutException) e);
-        } else if (e instanceof EvaluationInterruptedException) {
-            return formatEvaluationInterruptedException((EvaluationInterruptedException) e);
-        } else {
-            fmt.addAll(super.formatError(e));
-        }
-
-        return fmt;
-    }
-
-    private List<String> formatCompilationException(CompilationException e) {
+    public List<String> formatCompilationException(CompilationException e) {
         List<String> fmt = new ArrayList<>();
         SnippetEvent event = e.getBadSnippetCompilation();
         Snippet snippet = event.snippet();
@@ -210,7 +189,8 @@ public class JavaKernel extends BaseKernel {
         return fmt;
     }
 
-    private List<String> formatIncompleteSourceException(IncompleteSourceException e) {
+    @Override
+    public List<String> formatIncompleteSourceException(IncompleteSourceException e) {
         List<String> fmt = new ArrayList<>();
 
         String source = e.getSource();
@@ -220,7 +200,8 @@ public class JavaKernel extends BaseKernel {
         return fmt;
     }
 
-    private List<String> formatEvalException(EvalException e) {
+    @Override
+    public List<String> formatEvalException(EvalException e) {
         List<String> fmt = new ArrayList<>();
 
 
@@ -233,7 +214,8 @@ public class JavaKernel extends BaseKernel {
         return fmt;
     }
 
-    private List<String> formatUnresolvedReferenceException(UnresolvedReferenceException e) {
+    @Override
+    public List<String> formatUnresolvedReferenceException(UnresolvedReferenceException e) {
         List<String> fmt = new ArrayList<>();
 
         DeclarationSnippet snippet = e.getSnippet();
@@ -250,7 +232,8 @@ public class JavaKernel extends BaseKernel {
         return fmt;
     }
 
-    private List<String> formatEvaluationTimeoutException(EvaluationTimeoutException e) {
+    @Override
+    public List<String> formatEvaluationTimeoutException(EvaluationTimeoutException e) {
         List<String> fmt = new ArrayList<>(this.errorStyler.primaryLines(e.getSource()));
 
         fmt.add(this.errorStyler.secondary(String.format(
@@ -262,7 +245,8 @@ public class JavaKernel extends BaseKernel {
         return fmt;
     }
 
-    private List<String> formatEvaluationInterruptedException(EvaluationInterruptedException e) {
+    @Override
+    public List<String> formatEvaluationInterruptedException(EvaluationInterruptedException e) {
         List<String> fmt = new ArrayList<>(this.errorStyler.primaryLines(e.getSource()));
 
         fmt.add(this.errorStyler.secondary("Evaluation interrupted."));
